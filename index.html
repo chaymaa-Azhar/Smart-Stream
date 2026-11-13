@@ -17,7 +17,32 @@
   <div class="flex flex-1 ">
 
     <!-- Sidebar -->
-    <aside class="w-80 bg-gray-800 flex flex-col">
+    <aside class="w-80 bg-gray-800 flex flex-col ">
+     
+      <!-- category  -->
+       <div class="px-3 pb-3">
+  <button id="category-toggle" class="w-full flex justify-between p-2 rounded bg-gray-700 text-sm">
+    <span id="category-label">TOUS</span>
+    <span>▾</span>
+  </button>
+
+  <div id="category-menu" class="hidden mt-1 rounded bg-gray-700">
+    <button data-category="TOUS" class="block w-full px-3 py-2 text-left text-sm hover:bg-gray-600">TOUS</button>
+    <button data-category="GÉNÉRALISTE" class="block w-full px-3 py-2 text-left text-sm hover:bg-gray-600">GÉNÉRALISTE</button>
+    <button data-category="SPORT" class="block w-full px-3 py-2 text-left text-sm hover:bg-gray-600">SPORT</button>
+    <button data-category="ENFANTS" class="block w-full px-3 py-2 text-left text-sm hover:bg-gray-600">ENFANTS</button>
+    <button data-category="DOCUMENTAIRE" class="block w-full px-3 py-2 text-left text-sm hover:bg-gray-600">DOCUMENTAIRE</button>
+    <button data-category="MUSIQUE" class="block w-full px-3 py-2 text-left text-sm hover:bg-gray-600">MUSIQUE</button>
+
+
+
+  </div>
+</div>
+      <!-- category  -->
+
+
+
+
       <div class="p-3">
         <input id="search-input" type="text" placeholder="Rechercher une chaîne..."
           class="w-full p-2 rounded bg-gray-700 text-sm text-white">
@@ -39,6 +64,8 @@
 
       <!-- Liste (remplie par JS) -->
       <ul id="channel-list" class="flex-1 overflow-y-auto"></ul>
+
+      
     </aside>
 
     <!-- Preview -->
@@ -46,8 +73,8 @@
 
       <p id="preview-placeholder" class="text-gray-400">Sélectionnez une chaîne</p>
 
-      <div id="preview-content" class="hidden">
-        <img id="preview-image" src="" alt="" class="w-full rounded">
+      <div id="preview-content" class="w-full h-full">
+        <img id="preview-image" src="" alt="" class="w-full object-cover">
 
         <div class="mt-4 flex items-center gap-3">
           <span id="channel-number" class="px-2 py-1 rounded bg-gray-700 text-sm"></span>
