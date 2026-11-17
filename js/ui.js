@@ -25,16 +25,29 @@ const showPreview = (channel) => {
 export const afficher = (channels) => {
   list.innerHTML = channels
     .map(
-      ({ id, channelNumber, name, logo, category }) => `
+      ({ id, channelNumber, name, logo, category, isFavorite }) => `
         <li data-id="${id}" class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-700">
           <img src="${logo}" alt="${name}" class="h-10 w-10 rounded-2xl object-cover">
-          <div>
+          <div class="flex-1">
             <p class="text-sm font-medium">${channelNumber} · ${name}</p>
             <p class="text-xs text-gray-400">${category}</p>
           </div>
+          <button data-action="favorite" data-id="${id}" class="text-xl text-yellow-400">
+            ${isFavorite ? "★" : "☆"}
+          </button>
         </li>`
     )
     .join("");
+
+  list.querySelectorAll("li").forEach((li) => {
+    li.addEventListener("click", () => {
+      const channel = channels.find((c) => c.id === li.dataset.id);
+      setActive(li);
+      showPreview(channel);
+    });
+  });
+};
+
 
   list.querySelectorAll("li").forEach((li) => {
     li.addEventListener("click", () => {
@@ -43,4 +56,7 @@ export const afficher = (channels) => {
       showPreview(channel);
     });
   });
-};
+
+
+
+
