@@ -17,12 +17,7 @@ const showPreview = (channel) => {
   previewContent.classList.remove("hidden");
 };
 
-// const setActive = (activeItem) => {
-//   list.querySelectorAll("li").forEach((li) => li.classList.remove("bg-gray-700"));
-//   activeItem.classList.add("bg-gray-700");
-// };
-
-export const afficher = (channels) => {
+export const afficher = (channels, onFavorite) => {
   list.innerHTML = channels
     .map(
       ({ id, channelNumber, name, logo, category, isFavorite }) => `
@@ -32,9 +27,7 @@ export const afficher = (channels) => {
             <p class="text-sm font-medium">${channelNumber} · ${name}</p>
             <p class="text-xs text-gray-400">${category}</p>
           </div>
-          <button data-action="favorite" data-id="${id}" class="text-xl text-yellow-400">
-            ${isFavorite ? "★" : "☆"}
-          </button>
+          <button class="star text-xl text-yellow-400">${isFavorite ? "★" : "☆"}</button>
         </li>`
     )
     .join("");
@@ -42,21 +35,13 @@ export const afficher = (channels) => {
   list.querySelectorAll("li").forEach((li) => {
     li.addEventListener("click", () => {
       const channel = channels.find((c) => c.id === li.dataset.id);
-      setActive(li);
-      showPreview(channel);
-    });
-  });
-};
-
-
-  list.querySelectorAll("li").forEach((li) => {
-    li.addEventListener("click", () => {
-      const channel = channels.find((c) => c.id === li.dataset.id);
-    //   setActive(li);
       showPreview(channel);
     });
   });
 
-
-
-
+  list.querySelectorAll(".star").forEach((button) => {
+    button.addEventListener("click", () => {
+       onFavorite(button.closest("li").dataset.id);
+    });
+  });
+}; 

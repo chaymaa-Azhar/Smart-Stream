@@ -1,7 +1,7 @@
 const API_URL = "https://6af348f3d2377d6c3704d1d5.mockapi.io/channels";
 
-export const fetchchannel = async () => {
-  const response = await fetch(API_URL);
+const request = async (url, options) => {
+  const response = await fetch(url, options);
 
   if (!response.ok) {
     if (response.status === 404) {
@@ -16,5 +16,14 @@ export const fetchchannel = async () => {
   return response.json();
 };
 
+export const fetchchannel = () => request(API_URL);
 
+export const updateChannel = (id, data) =>
+  request(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
 
+export const setFavorite = (id, value) =>
+  updateChannel(id, { isFavorite: value });
